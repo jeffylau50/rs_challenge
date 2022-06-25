@@ -6,9 +6,10 @@ import './oneTeam.css'
 
 function Team(props){
 
-  const {city, setCity} = useContext(WeatherContext);
+  const {city, setCity, counter, setCount} = useContext(WeatherContext);
   const handleClick = (evt)=>{
     setCity(props.city)
+    setCount(!(counter))
     console.log(city)
   }
 return (
