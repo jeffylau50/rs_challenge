@@ -1,0 +1,15 @@
+.inputWidth{
+    width: 40%;
+
+}
+
+.inputWidth2{
+    width: 60%;
+
+}
+
+.textCenterClass{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}

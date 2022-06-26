@@ -12,6 +12,7 @@ function Team(props){
     setCount(!(counter))
     console.log(city)
   }
+  
 return (
 <div>
 <div className="card mt-2 indTeam">
@@ -26,9 +27,12 @@ alt="Team Logo"/>
     <li class="list-group-item"><b>City:</b> {props.city}</li>
     <li class="list-group-item"><b>Conference:</b> {props.conf}</li>
     <li class="list-group-item"><b>Division:</b> {props.div}</li>
+
+
   </ul>
 
 </div>
+
 </div>
 
 );
