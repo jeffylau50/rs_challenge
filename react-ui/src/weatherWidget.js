@@ -22,7 +22,7 @@ function WeatherWidget(props){
     </div><div className='col-6'><h3>{weatherInfo.current.condition.text}</h3></div></div></div></div>}</span>
  
     <span> {weatherInfo.current.condition.text==='Clear'&&<div><div id="weather-animations"><div className="row col-6">
-    <div className="weather"><div id="star1" class="star"></div><div id="moon"></div><div id="star2" className="star"></div>
+    <div className="weather"><div id="star1" className="star"></div><div id="moon"></div><div id="star2" className="star"></div>
       <div id="star3" className="star"></div></div><div className='col-6'><h3>{weatherInfo.current.condition.text}</h3></div></div></div></div>}</span></div>
 
       <span> {weatherInfo.current.condition.text==='Partly cloudy'&&<div><div id="weather-animations"><div className="row col-6">

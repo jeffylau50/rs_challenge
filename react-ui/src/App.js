@@ -16,7 +16,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
-
 const bBallapi = "https://www.balldontlie.io/api/v1/teams"
 
 function App() {
@@ -26,9 +25,25 @@ function App() {
   const [showContent, setShow] = useState(false)
   const [weatherInfoStatus, setStatus] = useState(false)
   
+
+
   useEffect(()=>{
     const fetchData = async () => {
-    let res = await axios.get(bBallapi);
+    let res = await axios.get(bBallapi)
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    });
+    console.log(process.env)
+
     setTeams(res.data.data)
     console.log(teams)
     }
@@ -37,13 +52,37 @@ function App() {
 
   useEffect(()=>{
     const fetchData = async () => {
-      let res = await axios.get(`http://api.weatherapi.com/v1/current.json?key==${city}&aqi=no`);
+      let res = await axios.get(`http://api.weatherapi.com/v1/current.json?key==${city}&aqi=no`)
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });
       setWeather(res.data)
       setStatus(true)
       }
       const fetchData2 = async () => {
         let city1 = city
-        let res = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${city1.replace(/ /g,"%20")}.json?limit=1&proximity=ip&types=place%2Cpostcode%2Caddress&access_token=pk.eyJ1IjoiamVmZnlsYXU1MCIsImEiOiJjbDBvdDJ2cDUxN3lmM2R0a3k3anZ5Nmw0In0.TjNo0bkKGM5jgk_0HMfw8Q`);
+        let res = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${city1.replace(/ /g,"%20")}.json?limit=1&proximity=ip&types=place%2Cpostcode%2Caddress&access_token=pk.eyJ1IjoiamVmZnlsYXU1MCIsImEiOiJjbDBvdDJ2cDUxN3lmM2R0a3k3anZ5Nmw0In0.TjNo0bkKGM5jgk_0HMfw8Q`)
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log('Error', error.message);
+          }
+          console.log(error.config);
+        });
         setGeoCode({coor1: res.data.features[0].geometry.coordinates[0], coor2:  res.data.features[0].geometry.coordinates[1]  })
         }
       fetchData();
@@ -73,28 +112,16 @@ function App() {
       {formToggle&&<Form/>}
     <div className="container">
       
-    {showContent===true&&<Map
-      initialViewState={{
-        latitude: 40.6699,
-        longitude: -103.5917,
-        zoom: 3.5
-      }}
-      style={{height: 500}}
-      mapStyle="mapbox://styles/mapbox/streets-v9"
-      mapboxAccessToken={"pk.eyJ1IjoiamVmZnlsYXU1MCIsImEiOiJjbDBvdDJ2cDUxN3lmM2R0a3k3anZ5Nmw0In0.TjNo0bkKGM5jgk_0HMfw8Q"}
-
-    > <Marker longitude={geoCode.coor1} latitude={geoCode.coor2} color="red" /> 
+    {showContent===true&&<Map initialViewState={{latitude: 40.6699,longitude: -103.5917, zoom: 3.5}}style={{height: 500}} 
+    mapStyle="mapbox://styles/mapbox/streets-v9" mapboxAccessToken={"pk.eyJ1IjoiamVmZnlsYXU1MCIsImEiOiJjbDBvdDJ2cDUxN3lmM2R0a3k3anZ5Nmw0In0.TjNo0bkKGM5jgk_0HMfw8Q"}> <Marker longitude={geoCode.coor1} latitude={geoCode.coor2} color="red" /> 
     </Map>}
      
       <main>
       <br/>
 
-  
       {weatherInfoStatus&&<WeatherWidget/>}
 
-
       {showContent===true&&<input className="mt-3 mb-2 form-control" onChange={handleChange} placeholder="Search" type='text'></input>}
-    
 
       <div className='container'>
       <div className='row'>

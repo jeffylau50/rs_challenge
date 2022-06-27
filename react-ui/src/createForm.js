@@ -6,10 +6,10 @@ function Form(props){
 
     const {teams, setTeams, formToggle, setFormToggle} = useContext(WeatherContext);
     const [teamName, setTeamName] = useState('')
-    const [divName, setDivName] = useState('')
-    const [cityName, setCityName] = useState('')
-    const [conName, setConName] = useState('')
-    const [teamLogo, setLogo] = useState('')
+    const [divName, setDivName] = useState('Pacific')
+    const [cityName, setCityName] = useState('Los Angeles')
+    const [conName, setConName] = useState('East')
+    const [teamLogo, setLogo] = useState('orl')
     function handleSubmit(evt){
         evt.preventDefault()
         let newTeam = {abbreviation: teamLogo, city: cityName, conference: conName, division: divName, full_name: teamName, name: teamName}
